@@ -176,14 +176,6 @@
       const sendBtn = document.getElementById("send-btn");
       const chatBody = document.querySelector(".chat-body");
 
-      // Manage clientId in localStorage
-      let clientId = localStorage.getItem("chatbot_client_id");
-      if (!clientId) {
-        clientId = "id-" + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem("chatbot_client_id", clientId);
-      }
-      console.log("Client ID:", clientId);
-
       toggleBtn.addEventListener("click", () => {
         const isOpen = chatWidget.classList.contains("open");
         chatWidget.classList.toggle("open", !isOpen);
@@ -211,11 +203,11 @@
 
         try {
           const response = await fetch(
-            "https://skautomate.onrender.com/webhook-test/a9364bf8-11d7-4700-a177-d16209cbf1b6",
+            "https://skautomate.onrender.com/webhook/a9364bf8-11d7-4700-a177-d16209cbf1b6",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ message: userMsg, clientId: clientId }),
+              body: JSON.stringify({ message: userMsg }),
             }
           );
 
