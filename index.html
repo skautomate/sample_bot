@@ -134,7 +134,7 @@
           src="./Image/Green Tree Illustration Happy World Enviroment Day Instagram Post .png"
           alt="Agent Avatar"
         />
-        <div class="infhttps://i.pravatar.cc/100o">
+        <div class="info">
           <h4>Couponfares Assistant</h4>
           <p>Ask Away !</p>
         </div>
@@ -169,6 +169,18 @@
     </div>
 
     <script>
+      // Generate or retrieve a persistent clientId stored in localStorage
+      function getClientId() {
+        let clientId = localStorage.getItem("clientId");
+        if (!clientId) {
+          clientId = "client-" + Math.random().toString(36).slice(2, 10);
+          localStorage.setItem("clientId", clientId);
+        }
+        return clientId;
+      }
+
+      const clientId = getClientId();
+
       const toggleBtn = document.getElementById("chat-toggle-btn");
       const chatWidget = document.querySelector(".chat-widget");
       const closeBtn = document.getElementById("chat-close-btn");
@@ -207,7 +219,10 @@
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ message: userMsg }),
+              body: JSON.stringify({
+                message: userMsg,
+                clientId: clientId,
+              }),
             }
           );
 
