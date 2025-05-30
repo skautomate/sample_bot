@@ -176,6 +176,14 @@
       const sendBtn = document.getElementById("send-btn");
       const chatBody = document.querySelector(".chat-body");
 
+      // Manage clientId in localStorage
+      let clientId = localStorage.getItem("chatbot_client_id");
+      if (!clientId) {
+        clientId = "id-" + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem("chatbot_client_id", clientId);
+      }
+      console.log("Client ID:", clientId);
+
       toggleBtn.addEventListener("click", () => {
         const isOpen = chatWidget.classList.contains("open");
         chatWidget.classList.toggle("open", !isOpen);
@@ -207,7 +215,7 @@
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ message: userMsg }),
+              body: JSON.stringify({ message: userMsg, clientId: clientId }),
             }
           );
 
